@@ -2,3 +2,4 @@
 Technologies used:
 Hibernate
 CDI
+JUnit5
