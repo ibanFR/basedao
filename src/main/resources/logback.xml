@@ -6,6 +6,8 @@
     </appender>
 
     <logger name="org.hibernate" level="info" />
+    <logger name="org.jboss.weld" level="info" />
+
 
     <root level="DEBUG">
         <appender-ref ref="CONSOLE" />
