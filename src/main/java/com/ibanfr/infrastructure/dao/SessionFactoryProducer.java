@@ -1,11 +1,10 @@
-package com.ibanfr.dao;
+package com.ibanfr.infrastructure.dao;
 
-import com.ibanfr.domain.User;
+import com.ibanfr.domain.Employee;
+import jakarta.enterprise.inject.Produces;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl;
-import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.service.ServiceRegistry;
 
@@ -19,44 +18,29 @@ import java.util.Map;
  */
 public class SessionFactoryProducer {
 
-    //public SessionFactory produceSessionFactory(){
-    //    StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder()
-    //            .configure( "org/hibernate/example/MyCfg.xml" )
-    //            .build();
-    //
-    //    Metadata metadata = new MetadataSources(standardRegistry )
-    //            .addAnnotatedClass( MyEntity.class )
-    //            .addAnnotatedClassName( "org.hibernate.example.Customer" )
-    //            .addResource( "org/hibernate/example/Order.hbm.xml" )
-    //            .addResource( "org/hibernate/example/Product.orm.xml" )
-    //            .getMetadataBuilder()
-    //            .applyImplicitNamingStrategy(ImplicitNamingStrategyJpaCompliantImpl.INSTANCE )
-    //            .build();
-    //
-    //    SessionFactory sessionFactory = metadata.getSessionFactoryBuilder()
-    //                                            .applyBeanManager( getBeanManagerFromSomewhere() )
-    //                                            .build();
-    //}
-
+    @Produces
     SessionFactory produceH2SessionFactory(){
-        Map settings = Map.of("hibernate.connection.url", "jdbc:h2:mem:testdb",
+        Map<String, Object> settings = Map.of("hibernate.connection.url", "jdbc:h2:mem:testdb",
                               "hibernate.connection.driver_class", "org.h2.Driver",
                               "hibernate.hbm2ddl.auto", "update",
-                              "hibernate.show_sql", "false");
+                              "hibernate.show_sql", "false",
+                              "hibernate.current_session_context_class","thread");
 
-        return getSessionFactory(settings, User.class);
+        return getSessionFactory(settings, Employee.class);
     }
 
-    SessionFactory getSessionFactory(Map settings, Class<?>... annotatedClasses){
+    protected SessionFactory produceSessionFactory(Map<String, Object> settings, Class<?>... annotatedClasses){
+        return getSessionFactory(settings,annotatedClasses);
+    }
+
+    SessionFactory getSessionFactory(Map<String, Object> settings, Class<?>... annotatedClasses){
 
         //Build ServiceRegistry
         ServiceRegistry serviceRegistry = buildServiceRegistry(settings);
         //Create the Metadata object using the specified ServiceRegistry.
         Metadata metadata = buildMetadata(serviceRegistry, annotatedClasses);
         //Build the SessionFactory
-        SessionFactory sessionFactory = buildSessionFactory(metadata);
-
-        return sessionFactory;
+        return buildSessionFactory(metadata);
     }
 
     /**
@@ -64,7 +48,7 @@ public class SessionFactoryProducer {
      * @param settings
      * @return
      */
-    ServiceRegistry buildServiceRegistry(Map settings) {
+    ServiceRegistry buildServiceRegistry(Map<String, Object> settings) {
 
         //Build ServiceRegistry
         ServiceRegistry serviceRegistry;
@@ -79,7 +63,7 @@ public class SessionFactoryProducer {
      * to the database.
      * <p>
      * See
-     * <a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html#bootstrap-native-metadata">Hibernate User Guide#Building the Metadata</a>
+     * <a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html#bootstrap-native-metadata">Hibernate Employee Guide#Building the Metadata</a>
      *
      * @param serviceRegistry
      * @return
@@ -96,14 +80,15 @@ public class SessionFactoryProducer {
      * Build the SessionFactory instance.
      * <p>
      * See
-     * <a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html#bootstrap-native-SessionFactory">Hibernate User Guide#Building the SessionFactory</a>
+     * <a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html#bootstrap-native-SessionFactory">Hibernate Employee Guide#Building the SessionFactory</a>
      *
      * @param metadata
      * @return
      */
     SessionFactory buildSessionFactory(Metadata metadata){
-        SessionFactory factory = metadata.getSessionFactoryBuilder()
-                                         .build();
+        SessionFactory factory;
+        factory = metadata.getSessionFactoryBuilder()
+                          .build();
         return factory;
     }
 }

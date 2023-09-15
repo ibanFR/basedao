@@ -1,4 +1,4 @@
-package com.ibanfr.dao;
+package com.ibanfr.infrastructure.dao;
 
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.BeforeEach;
@@ -6,9 +6,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-class SessionFactoryProducerTest {
+class SessionFactoryProducerIT {
 
     SessionFactoryProducer sessionFactoryProducer;
 
