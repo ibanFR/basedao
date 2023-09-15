@@ -5,6 +5,8 @@
         </encoder>
     </appender>
 
+    <logger name="org.hibernate" level="info" />
+
     <root level="DEBUG">
         <appender-ref ref="CONSOLE" />
     </root>
