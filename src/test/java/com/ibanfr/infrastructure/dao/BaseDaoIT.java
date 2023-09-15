@@ -19,8 +19,6 @@ class BaseDaoIT {
 
     final Map<String, Object> settings = Map.of("hibernate.connection.url",
                                 "jdbc:h2:mem:testdb",
-                                "hibernate.connection.password",
-                                "assf1r3",
                                 "hibernate.connection.driver_class",
                                 "org.h2.Driver",
                                 "hibernate.hbm2ddl.auto",
