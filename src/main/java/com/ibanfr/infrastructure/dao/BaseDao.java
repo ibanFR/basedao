@@ -1,6 +1,5 @@
 package com.ibanfr.infrastructure.dao;
 
-import com.google.common.reflect.TypeToken;
 import com.ibanfr.domain.Identity;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
@@ -16,10 +15,12 @@ public class BaseDao<T  extends Identity> implements Dao<T>{
     SessionFactory sessionFactory;
 
     @Inject
-    public BaseDao(SessionFactory sessionFactory) {
+    public BaseDao(Class<T> type, SessionFactory sessionFactory) {
 
-        TypeToken<T> typeToken = new TypeToken<T>(getClass()) {};
-        this.type = (Class<T>) typeToken.getRawType();
+        this.type = type;
+
+        //TypeToken<T> typeToken = new TypeToken<>(getClass()) {};
+        //this.type = (Class<T>) typeToken.getRawType();
 
         this.sessionFactory = sessionFactory;
     }

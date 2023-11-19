@@ -10,6 +10,6 @@ public class EmployeeDao extends BaseDao<Employee>{
 
     @Inject
     public EmployeeDao(SessionFactory sessionFactory) {
-        super(sessionFactory);
+        super(Employee.class, sessionFactory);
     }
 }
