@@ -1,16 +1,15 @@
 package com.ibanfr.domain;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Getter;
+import lombok.*;
 
+@Builder
 @Entity
 @Getter
-public class Employee {
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
+public class Employee extends Identity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    Integer id;
+    String name;
 }

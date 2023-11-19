@@ -1,5 +1,6 @@
 package com.ibanfr.infrastructure.dao;
 
+import com.ibanfr.domain.Identity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,11 +12,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-class FooEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    Integer id;
+class FooEntity extends Identity {
 
     @Column
     String fooName;
