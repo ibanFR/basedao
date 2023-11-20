@@ -4,7 +4,7 @@ import com.ibanfr.domain.Identity;
 
 import java.util.Optional;
 
-public interface Dao<T extends Identity >{
+public interface Dao<T>{
 
     void save(T entity);
 

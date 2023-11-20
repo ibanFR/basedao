@@ -6,10 +6,10 @@ import jakarta.inject.Inject;
 import org.hibernate.SessionFactory;
 
 @Dependent
-public class EmployeeDao extends BaseDao<Employee>{
+public class EmployeePersistentDao extends BaseDao<Employee>{
 
     @Inject
-    public EmployeeDao(SessionFactory sessionFactory) {
+    public EmployeePersistentDao(SessionFactory sessionFactory) {
         super(Employee.class, sessionFactory);
     }
 }

@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @EnableAutoWeld
 @AddEnabledInterceptors(TransactionInterceptor.class)
-class EmployeeDaoIT {
+class EmployeePersistentDaoIT {
 
     final Map<String, Object> settings = Map.of("hibernate.connection.url",
                                                 "jdbc:h2:mem:testdb",
@@ -38,7 +38,7 @@ class EmployeeDaoIT {
                                                                                        Employee.class);
 
     @Inject
-    EmployeeDao employeeDao;
+    EmployeePersistentDao employeeDao;
 
 
     @Test

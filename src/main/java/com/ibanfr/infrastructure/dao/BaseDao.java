@@ -18,10 +18,6 @@ public class BaseDao<T  extends Identity> implements Dao<T>{
     public BaseDao(Class<T> type, SessionFactory sessionFactory) {
 
         this.type = type;
-
-        //TypeToken<T> typeToken = new TypeToken<>(getClass()) {};
-        //this.type = (Class<T>) typeToken.getRawType();
-
         this.sessionFactory = sessionFactory;
     }
 
