@@ -1,6 +1,6 @@
 package com.ibanfr.infrastructure.dao;
 
-import com.ibanfr.domain.Employee;
+import com.ibanfr.domain.model.Employee;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;

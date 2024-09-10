@@ -1,6 +1,6 @@
 package com.ibanfr.infrastructure.dao;
 
-import com.ibanfr.domain.Employee;
+import com.ibanfr.domain.model.Employee;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -20,7 +20,7 @@ class EmployeeInMemoryDaoTest {
     void shouldSaveEmployee() {
 
         //given
-        Employee ivan = new Employee("Ivan");
+        Employee ivan = Employee.of("Ivan");
 
         //when
         employeeInMemoryDao.save(ivan);
@@ -38,7 +38,7 @@ class EmployeeInMemoryDaoTest {
         @BeforeEach
         void setUp() {
             //given
-            ivan = new Employee("Ivan");
+            ivan = Employee.of("Ivan");
 
             employeeInMemoryDao.save(ivan);
         }
