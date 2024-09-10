@@ -4,4 +4,20 @@ Hibernate, CDI, JUnit5
 
 Build the project with `mvn clean install`
 
+See Generic Repository:
+https://lestard.eu/2015/generic_repository_part1/
+https://lestard.eu/2015/generic_repository_part2/
+
+See DDD identity:
+https://enterprisecraftsmanship.com/posts/dont-use-ids-domain-entities/
+https://medium.com/unil-ci-software-engineering/clean-ddd-lessons-modeling-identity-ff8bc17e0ae6
+
+See Generic Dao:
+https://rpestano.wordpress.com/2013/07/15/cdi-generic-dao/
+
+TODO:
+- Use github actions to build the project on every commit
+
+
+
 
