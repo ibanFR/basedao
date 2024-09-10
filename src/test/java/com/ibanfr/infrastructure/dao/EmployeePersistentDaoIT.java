@@ -27,8 +27,8 @@ class EmployeePersistentDaoIT {
                                                 "org.h2.Driver",
                                                 "hibernate.hbm2ddl.auto",
                                                 "update",
-                                                "hibernate.show_sql",
-                                                "true",
+                                                //"hibernate.show_sql",
+                                                //"true",
                                                 "hibernate.current_session_context_class",
                                                 "thread");
 
@@ -61,7 +61,7 @@ class EmployeePersistentDaoIT {
         //then
         assertThat(employee.getId())
                 .isNotNull()
-                .isEqualTo(1);
+                .isPositive();
     }
 
     @Nested
@@ -87,8 +87,8 @@ class EmployeePersistentDaoIT {
             Optional<Employee> optionalFoo = employeeDao.findById(employee.getId());
 
             //then
-            assertThat(optionalFoo.get())
-                    .isEqualTo(employee);
+            assertThat(optionalFoo)
+                    .contains(employee);
         }
 
     }

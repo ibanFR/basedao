@@ -17,7 +17,6 @@ import java.util.Map;
 import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.fail;
 
 @EnableAutoWeld
 @AddEnabledInterceptors(TransactionInterceptor.class)
@@ -26,15 +25,15 @@ class TeamPersistentRepositoryIT {
     final Map<String, Object> settings = Map.of("hibernate.connection.url",
                                                 //"jdbc:mysql://localhost:3306/ivan_test?useSSL=false&createDatabaseIfNotExist=true",
                                                 "jdbc:h2:mem:testdb",
-                                                "hibernate.connection.username",
-                                                "root",
-                                                "hibernate.connection.password",
-                                                "assf1r3mysql",
+                                                //"hibernate.connection.username",
+                                                //"root",
+                                                //"hibernate.connection.password",
+                                                //"assf1r3mysql",
                                                 "hibernate.connection.driver_class",
                                                 //"com.mysql.cj.jdbc.Driver",
                                                 "org.h2.Driver",
-                                                "hibernate.dialect",
-                                                "org.hibernate.dialect.MySQLDialect",
+                                                //"hibernate.dialect",
+                                                //"org.hibernate.dialect.MySQLDialect",
                                                 "hibernate.hbm2ddl.auto",
                                                 "update",
                                                 "hibernate.show_sql",
@@ -78,8 +77,6 @@ class TeamPersistentRepositoryIT {
     @Test
     @DisplayName("should save Team with Employees")
     void shouldSaveTeamWithEmployees() {
-
-
 
         //when
         teamRepository.save(team);

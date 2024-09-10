@@ -1,6 +1,7 @@
 package com.ibanfr.infrastructure.dao;
 
 import com.ibanfr.domain.model.Employee;
+import com.ibanfr.domain.model.Team;
 import jakarta.enterprise.inject.Produces;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
@@ -26,7 +27,7 @@ public class SessionFactoryProducer {
                               "hibernate.show_sql", "false",
                               "hibernate.current_session_context_class","thread");
 
-        return getSessionFactory(settings, Employee.class);
+        return getSessionFactory(settings, Employee.class, Team.class);
     }
 
     protected SessionFactory produceSessionFactory(Map<String, Object> settings, Class<?>... annotatedClasses){
