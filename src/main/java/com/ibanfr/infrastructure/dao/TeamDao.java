@@ -7,10 +7,10 @@ import jakarta.inject.Inject;
 import org.hibernate.SessionFactory;
 
 @Dependent
-public class TeamPersistentRepository extends BaseDao<Team> implements TeamRepository {
+public class TeamDao extends BaseDao<Team> implements TeamRepository {
 
     @Inject
-    public TeamPersistentRepository(SessionFactory sessionFactory) {
+    public TeamDao(SessionFactory sessionFactory) {
         super(Team.class, sessionFactory);
     }
 }

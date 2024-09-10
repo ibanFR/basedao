@@ -51,7 +51,7 @@ class TeamPersistentRepositoryIT {
 
 
     @Inject
-    TeamPersistentRepository teamRepository;
+    TeamDao teamRepository;
 
     Team team;
     Employee ivan;

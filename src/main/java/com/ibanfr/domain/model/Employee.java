@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Entity
 @Getter
 @EqualsAndHashCode
-public class Employee extends EntityId implements Serializable {
+public class Employee extends DomainEntity implements Serializable {
 
     String name;
 

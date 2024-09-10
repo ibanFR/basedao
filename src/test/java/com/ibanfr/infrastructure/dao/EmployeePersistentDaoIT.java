@@ -38,7 +38,7 @@ class EmployeePersistentDaoIT {
                                                                                        Employee.class);
 
     @Inject
-    EmployeePersistentDao employeeDao;
+    EmployeeDao employeeDao;
 
 
     @Test

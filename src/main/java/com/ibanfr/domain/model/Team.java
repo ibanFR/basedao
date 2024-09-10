@@ -13,14 +13,9 @@ import java.util.Objects;
 @Entity
 @Getter
 @ToString
-public class Team implements Serializable {
+public class Team extends DomainEntity implements Serializable {
 
     private static final long serialVersionUID = -6197675373768898713L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
-    private Long id;
 
     @Column
     private String name;

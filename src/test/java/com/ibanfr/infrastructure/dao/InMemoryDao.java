@@ -1,10 +1,10 @@
 package com.ibanfr.infrastructure.dao;
 
-import com.ibanfr.domain.model.EntityId;
+import com.ibanfr.domain.model.DomainEntity;
 
 import java.util.*;
 
-public class InMemoryDao<T extends EntityId> implements Dao<T>{
+public class InMemoryDao<T extends DomainEntity> implements Dao<T>{
 
     List<T> repository = new ArrayList<>();
 

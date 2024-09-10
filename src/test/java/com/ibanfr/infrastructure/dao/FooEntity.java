@@ -1,6 +1,6 @@
 package com.ibanfr.infrastructure.dao;
 
-import com.ibanfr.domain.model.EntityId;
+import com.ibanfr.domain.model.DomainEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-class FooEntity extends EntityId {
+class FooEntity extends DomainEntity {
 
     @Column
     String fooName;
