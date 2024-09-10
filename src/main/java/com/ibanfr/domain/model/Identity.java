@@ -1,4 +1,4 @@
-package com.ibanfr.domain;
+package com.ibanfr.domain.model;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,5 +14,5 @@ public class Identity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Integer id;
+    Long id;
 }

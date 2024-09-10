@@ -1,6 +1,6 @@
 package com.ibanfr.infrastructure.dao;
 
-import com.ibanfr.domain.Identity;
+import com.ibanfr.domain.model.Identity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
