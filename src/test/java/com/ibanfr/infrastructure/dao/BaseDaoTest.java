@@ -47,7 +47,7 @@ class BaseDaoTest {
         void shouldFindEntityByTheGivenId() {
 
             //given
-            Integer id = 1;
+            Long id = 1L;
 
             //when
             baseDao.findById(id);
