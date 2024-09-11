@@ -30,10 +30,29 @@ public class SessionFactoryProducer {
         return getSessionFactory(settings, Employee.class, Team.class);
     }
 
-    protected SessionFactory produceSessionFactory(Map<String, Object> settings, Class<?>... annotatedClasses){
-        return getSessionFactory(settings,annotatedClasses);
+    /**
+     * Produces a SessionFactory instance.
+     * <p>
+     * The SessionFactory instance is created using the specified settings and annotated classes.
+     *
+     * @param settings
+     * @param annotatedClasses
+     * @return
+     */
+    protected SessionFactory produceSessionFactory(Map<String, Object> settings,
+                                                   Class<?>... annotatedClasses) {
+        return getSessionFactory(settings, annotatedClasses);
     }
 
+    /**
+     * Produces a SessionFactory instance.
+     * <p>
+     * The SessionFactory instance is created using the specified settings and annotated classes.
+     *
+     * @param settings
+     * @param annotatedClasses
+     * @return
+     */
     SessionFactory getSessionFactory(Map<String, Object> settings, Class<?>... annotatedClasses){
 
         //Build ServiceRegistry
@@ -45,6 +64,10 @@ public class SessionFactoryProducer {
     }
 
     /**
+     * Build the ServiceRegistry instance.
+     * <p>
+     * See
+     * <a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html#bootstrap-native-ServiceRegistry">Hibernate Employee Guide#Building the ServiceRegistry</a>
      *
      * @param settings
      * @return
