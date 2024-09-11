@@ -2,6 +2,7 @@ package com.ibanfr.infrastructure.dao;
 
 import com.ibanfr.domain.model.Employee;
 import com.ibanfr.domain.model.Team;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
@@ -20,6 +21,7 @@ import java.util.Map;
 public class SessionFactoryProducer {
 
     @Produces
+    @ApplicationScoped
     SessionFactory produceH2SessionFactory(){
         Map<String, Object> settings = Map.of("hibernate.connection.url", "jdbc:h2:mem:testdb",
                               "hibernate.connection.driver_class", "org.h2.Driver",
