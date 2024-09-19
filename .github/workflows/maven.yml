@@ -34,6 +34,12 @@ jobs:
     - name: Generate Maven site
       run: mvn site site:stage
 
+      # Step to set Git user identity for SCM publishing
+    - name: Set Git user identity
+      run: |
+        git config --global user.email "ibanfernandezrojo@msn.com"
+        git config --global user.name "ibanFR"
+
     # Step to publish Maven website to any supported SCM
     - name: Upload Maven site to GitHub Pages
       run: mvn scm-publish:publish-scm
