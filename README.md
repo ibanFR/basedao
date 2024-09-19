@@ -26,7 +26,6 @@ git config --global user.email "yourEmail@yourEmail.com"
 ```
 
 TODO:
-- Use github actions to build the project on every commit
 - create coverage profile for running with jacoco support
 
 
