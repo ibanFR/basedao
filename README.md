@@ -17,6 +17,8 @@ https://rpestano.wordpress.com/2013/07/15/cdi-generic-dao/
 
 Generate a site of the project with `mvn site`
 
+Publish the site to github pages with `mvn clean site site:stage scm-publish:publish-scm`
+
 TODO:
 - Use github actions to build the project on every commit
 - Use github actions to publish a site of the project to github pages
