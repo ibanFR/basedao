@@ -32,7 +32,6 @@ public class Team extends DomainEntity implements Serializable {
      * <p>
      * Specifying {@link ForeignKey} name to avoid using the persistence provider's default foreign key strategy.
      *
-     * @return the List of {@link Employee} entities.
      */
     @Setter
     @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
