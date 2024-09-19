@@ -16,7 +16,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -32,14 +31,16 @@ jobs:
 
     # Step to generate the Maven site
     - name: Generate Maven site
-      run: mvn site site:stage
+      run: mvn site
 
-      # Step to publish Maven website to any supported SCM
-    - name: Upload Maven site to GitHub Pages
-      run: mvn scm-publish:publish-scm
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3.0.1
+      with:
+        path: target/site
+
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4.0.5
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     #- name: Update dependency graph
