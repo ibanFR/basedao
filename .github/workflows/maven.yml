@@ -34,22 +34,11 @@ jobs:
     - name: Generate Maven site
       run: mvn site site:stage
 
-
-    # Step to set Git user identity for SCM publishing
-    - name: Set Git user identity
-      run: |
-        git config --global user.email "ibanfernandezrojo@msn.com"
-        git config --global user.name "ibanFR"
-
-    # Step to set up authentication using GitHub token
-    - name: Configure GitHub token for authentication
-      run: |
-        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/ibanFR/basedao.git
-  
-
       # Step to publish Maven website to any supported SCM
     - name: Upload Maven site to GitHub Pages
       run: mvn scm-publish:publish-scm
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
