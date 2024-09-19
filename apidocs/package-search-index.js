@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.ibanfr"},{"l":"com.ibanfr.domain.model"},{"l":"com.ibanfr.infrastructure.dao"}];updateSearchResults();

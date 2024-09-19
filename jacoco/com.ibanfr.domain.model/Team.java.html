@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Team.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">basedao</a> &gt; <a href="index.source.html" class="el_package">com.ibanfr.domain.model</a> &gt; <span class="el_source">Team.java</span></div><h1>Team.java</h1><pre class="source lang-java linenums">package com.ibanfr.domain.model;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.Objects;
+
+@Table(name = &quot;team&quot;)
+@Entity
+@Getter
+<span class="nc" id="L15">@ToString</span>
+public class Team extends DomainEntity implements Serializable {
+
+    private static final long serialVersionUID = -6197675373768898713L;
+
+    @Column
+<span class="nc" id="L21">    private String name;</span>
+
+    /**
+     * OneToMany association with {@link Employee} entity mapped as a List.
+     * &lt;p&gt;
+     * Defining {@link CascadeType#ALL} for the associated {@link Employee} entity.
+     * &lt;p&gt;
+     * Defining orphanRemoval to cascade the remove operation to entities that have been removed from the
+     * relationship.
+     * &lt;p&gt;
+     * Using {@link JoinColumn} to implement unidirectional one-to-many association using a foreign key mapping.
+     * &lt;p&gt;
+     * Specifying {@link ForeignKey} name to avoid using the persistence provider's default foreign key strategy.
+     *
+     */
+<span class="fc" id="L36">    @Setter</span>
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
+    @JoinColumn(name = &quot;team_id&quot;, foreignKey = @ForeignKey(name = &quot;FK_user_team_id&quot;))
+<span class="fc" id="L39">    private List&lt;Employee&gt; members;</span>
+
+    /**
+     * Empty constructor required by hibernate
+     */
+<span class="fc" id="L44">    protected Team(){</span>
+<span class="fc" id="L45">    }</span>
+
+<span class="fc" id="L47">    private Team(String name) {</span>
+<span class="fc" id="L48">        Objects.requireNonNull(name);</span>
+<span class="fc" id="L49">        this.name = name;</span>
+<span class="fc" id="L50">    }</span>
+
+    public static Team of(String name) {
+<span class="fc" id="L53">        return new Team(name);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

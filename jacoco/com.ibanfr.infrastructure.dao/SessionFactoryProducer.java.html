@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SessionFactoryProducer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">basedao</a> &gt; <a href="index.source.html" class="el_package">com.ibanfr.infrastructure.dao</a> &gt; <span class="el_source">SessionFactoryProducer.java</span></div><h1>SessionFactoryProducer.java</h1><pre class="source lang-java linenums">package com.ibanfr.infrastructure.dao;
+
+import com.ibanfr.domain.model.Employee;
+import com.ibanfr.domain.model.Team;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.service.ServiceRegistry;
+
+import java.util.Map;
+
+/**
+ *
+ * Uses hibernate native bootstrapping mechanism
+ *
+ * &lt;a href=&quot;https://docs.jboss.org/hibernate/orm/5.4/topical/html_single/bootstrap/NativeBootstrapping.html&quot;&gt;Native bootstrapping&lt;/a&gt;
+ */
+<span class="fc" id="L21">public class SessionFactoryProducer {</span>
+
+    @Produces
+    @ApplicationScoped
+    SessionFactory produceH2SessionFactory(){
+<span class="fc" id="L26">        Map&lt;String, Object&gt; settings = Map.of(&quot;hibernate.connection.url&quot;, &quot;jdbc:h2:mem:testdb&quot;,</span>
+                              &quot;hibernate.connection.driver_class&quot;, &quot;org.h2.Driver&quot;,
+                              &quot;hibernate.hbm2ddl.auto&quot;, &quot;update&quot;,
+                              &quot;hibernate.show_sql&quot;, &quot;false&quot;,
+                              &quot;hibernate.current_session_context_class&quot;,&quot;thread&quot;);
+
+<span class="fc" id="L32">        return getSessionFactory(settings, Employee.class, Team.class);</span>
+    }
+
+    /**
+     * Produces a SessionFactory instance.
+     * &lt;p&gt;
+     * The SessionFactory instance is created using the specified settings and annotated classes.
+     *
+     * @param settings
+     * @param annotatedClasses
+     * @return
+     */
+    protected SessionFactory produceSessionFactory(Map&lt;String, Object&gt; settings,
+                                                   Class&lt;?&gt;... annotatedClasses) {
+<span class="fc" id="L46">        return getSessionFactory(settings, annotatedClasses);</span>
+    }
+
+    /**
+     * Produces a SessionFactory instance.
+     * &lt;p&gt;
+     * The SessionFactory instance is created using the specified settings and annotated classes.
+     *
+     * @param settings
+     * @param annotatedClasses
+     * @return
+     */
+    SessionFactory getSessionFactory(Map&lt;String, Object&gt; settings, Class&lt;?&gt;... annotatedClasses){
+
+        //Build ServiceRegistry
+<span class="fc" id="L61">        ServiceRegistry serviceRegistry = buildServiceRegistry(settings);</span>
+        //Create the Metadata object using the specified ServiceRegistry.
+<span class="fc" id="L63">        Metadata metadata = buildMetadata(serviceRegistry, annotatedClasses);</span>
+        //Build the SessionFactory
+<span class="fc" id="L65">        return buildSessionFactory(metadata);</span>
+    }
+
+    /**
+     * Build the ServiceRegistry instance.
+     * &lt;p&gt;
+     * See
+     * &lt;a href=&quot;https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html#bootstrap-native-ServiceRegistry&quot;&gt;Hibernate Employee Guide#Building the ServiceRegistry&lt;/a&gt;
+     *
+     * @param settings
+     * @return
+     */
+    ServiceRegistry buildServiceRegistry(Map&lt;String, Object&gt; settings) {
+
+        //Build ServiceRegistry
+        ServiceRegistry serviceRegistry;
+<span class="fc" id="L81">        serviceRegistry = new StandardServiceRegistryBuilder()/* .configure() */</span>
+<span class="fc" id="L82">                                                              .applySettings(settings)</span>
+<span class="fc" id="L83">                                                              .build();</span>
+<span class="fc" id="L84">        return serviceRegistry;</span>
+    }
+
+    /**
+     * Create a Metadata object containing the parsed representations of the application domain model and its mapping
+     * to the database.
+     * &lt;p&gt;
+     * See
+     * &lt;a href=&quot;https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html#bootstrap-native-metadata&quot;&gt;Hibernate Employee Guide#Building the Metadata&lt;/a&gt;
+     *
+     * @param serviceRegistry
+     * @return
+     */
+    Metadata buildMetadata(ServiceRegistry serviceRegistry, Class&lt;?&gt;... annotatedClasses){
+        Metadata metadata;
+<span class="fc" id="L99">        metadata = new MetadataSources(serviceRegistry).addAnnotatedClasses(annotatedClasses)</span>
+<span class="fc" id="L100">                                                       .getMetadataBuilder()</span>
+<span class="fc" id="L101">                                                       .build();</span>
+<span class="fc" id="L102">        return metadata;</span>
+    }
+
+    /**
+     * Build the SessionFactory instance.
+     * &lt;p&gt;
+     * See
+     * &lt;a href=&quot;https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html#bootstrap-native-SessionFactory&quot;&gt;Hibernate Employee Guide#Building the SessionFactory&lt;/a&gt;
+     *
+     * @param metadata
+     * @return
+     */
+    SessionFactory buildSessionFactory(Metadata metadata){
+        SessionFactory factory;
+<span class="fc" id="L116">        factory = metadata.getSessionFactoryBuilder()</span>
+<span class="fc" id="L117">                          .build();</span>
+<span class="fc" id="L118">        return factory;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
