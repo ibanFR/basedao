@@ -34,8 +34,7 @@ class EmployeePersistentDaoIT {
 
     @Produces
     @ApplicationScoped
-    SessionFactory sessionFactory = new SessionFactoryProducer().produceSessionFactory(settings,
-                                                                                       Employee.class);
+    SessionFactory sessionFactory = new SessionFactoryProducer().produceSessionFactory(settings, Employee.class);
 
     @Inject
     EmployeeDao employeeDao;
@@ -71,8 +70,7 @@ class EmployeePersistentDaoIT {
         @BeforeEach
         void setUp() {
             //given
-            employee = Employee.of("Ivan");;
-
+            employee = Employee.of("Ivan");
             employeeDao.save(employee);
         }
 
@@ -84,7 +82,10 @@ class EmployeePersistentDaoIT {
 
             //then
             assertThat(optionalFoo)
-                    .contains(employee);
+                    .contains(employee)
+                    .get()
+                    .extracting(Employee::getName)
+                    .isEqualTo("Ivan");
         }
 
     }
