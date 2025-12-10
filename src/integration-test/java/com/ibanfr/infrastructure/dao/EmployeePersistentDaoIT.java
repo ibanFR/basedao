@@ -52,9 +52,7 @@ class EmployeePersistentDaoIT {
     @DisplayName("should save Foo entity")
     void should_save_entity() {
         //given
-        Employee employee = Employee.builder()
-                .name("Ivan")
-                .build();
+        Employee employee = Employee.of("Ivan");
         //when
         employeeDao.save(employee);
 
@@ -73,9 +71,7 @@ class EmployeePersistentDaoIT {
         @BeforeEach
         void setUp() {
             //given
-            employee = Employee.builder()
-                    .name("Ivan")
-                    .build();
+            employee = Employee.of("Ivan");;
 
             employeeDao.save(employee);
         }
